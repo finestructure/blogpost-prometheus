@@ -13,3 +13,11 @@ services:
     image: prom/node-exporter:0.12.0rc1
     ports:
       - '9100:9100'
+  grafana:
+    image: grafana/grafana:3.0.0-beta7
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
