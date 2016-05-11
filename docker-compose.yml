@@ -15,7 +15,7 @@ services:
         ports:
             - '9100:9100'
     grafana:
-        image: grafana/grafana:3.0.0-beta7
+        image: grafana/grafana:3.0.1
         environment:
             - GF_SECURITY_ADMIN_PASSWORD=pass
         volumes:
