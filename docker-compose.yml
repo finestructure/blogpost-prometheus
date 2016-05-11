@@ -6,6 +6,7 @@ services:
         volumes:
             - prometheus_data:/prometheus
             - ./prometheus.yml:/etc/prometheus/prometheus.yml
+            - ./alert.rules:/etc/prometheus/alert.rules
         command:
             - '-config.file=/etc/prometheus/prometheus.yml'
         ports:

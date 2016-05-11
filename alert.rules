@@ -1,0 +1,9 @@
+# Alert for any instance that is unreachable for a certain period of time
+ALERT service_down
+  IF up == 0
+  FOR 5s
+  LABELS { severity = "critical" }
+  ANNOTATIONS {
+    summary = "Instance {{ $labels.instance }} down",
+    description = "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 seconds.",
+  }

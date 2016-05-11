@@ -10,3 +10,5 @@ scrape_configs:
     - job_name: 'node-exporter'
       target_groups:
           - targets: ['node-exporter:9100']
+rule_files:
+    - 'alert.rules'
