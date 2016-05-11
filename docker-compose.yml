@@ -1,4 +1,4 @@
-# monitoring.yml
+# docker-compose.yml
 version: '2'
 services:
     prometheus:
