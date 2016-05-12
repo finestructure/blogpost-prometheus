@@ -9,6 +9,7 @@ services:
             - ./alert.rules:/etc/prometheus/alert.rules
         command:
             - '-config.file=/etc/prometheus/prometheus.yml'
+            - '-alertmanager.url=http://alertmanager:9093'
         ports:
             - '9090:9090'
     node-exporter:
@@ -25,6 +26,12 @@ services:
             - prometheus
         ports:
             - "3000:3000"
+    alertmanager:
+        image: prom/alertmanager:0.1.1
+        volumes:
+            - ./alertmanager.yml:/alertmanager.yml
+        command:
+            - '-config.file=/alertmanager.yml'
 volumes:
     prometheus_data: {}
     grafana_data: {}

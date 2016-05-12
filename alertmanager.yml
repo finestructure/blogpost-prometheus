@@ -1,0 +1,10 @@
+# alertmanager.yml
+route:
+    receiver: 'slack'
+receivers:
+    - name: 'slack'
+      slack_configs:
+          - send_resolved: true
+            username: 'Prometheus'
+            channel: '#random'
+            api_url: 'https://hooks.slack.com/services/<your>/<stuff>/<here>'
