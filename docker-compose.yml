@@ -2,11 +2,9 @@
 version: '2'
 services:
     prometheus:
-        image: prom/prometheus:0.18.0
+        build: ./prometheus
         volumes:
             - prometheus_data:/prometheus
-            - ./prometheus.yml:/etc/prometheus/prometheus.yml
-            - ./alert.rules:/etc/prometheus/alert.rules
         command:
             - '-config.file=/etc/prometheus/prometheus.yml'
             - '-alertmanager.url=http://alertmanager:9093'
@@ -27,9 +25,7 @@ services:
         ports:
             - "3000:3000"
     alertmanager:
-        image: prom/alertmanager:0.1.1
-        volumes:
-            - ./alertmanager.yml:/alertmanager.yml
+        build: ./alertmanager
         command:
             - '-config.file=/alertmanager.yml'
 volumes:
