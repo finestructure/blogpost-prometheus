@@ -8,12 +8,8 @@ services:
         command:
             - '-config.file=/etc/prometheus/prometheus.yml'
             - '-alertmanager.url=http://alertmanager:9093'
-        ports:
-            - '9090:9090'
     node-exporter:
         image: prom/node-exporter:0.12.0rc1
-        ports:
-            - '9100:9100'
     grafana:
         image: grafana/grafana:3.0.1
         environment:
@@ -22,12 +18,27 @@ services:
             - grafana_data:/var/lib/grafana
         depends_on:
             - prometheus
-        ports:
-            - "3000:3000"
     alertmanager:
         build: ./alertmanager
         command:
             - '-config.file=/alertmanager.yml'
+    ssl:
+        image: opencapacity/lets-nginx:1.3
+        environment:
+            - EMAIL=webmaster@opencapacity.co
+            - DOMAIN=test.opencapacity.co
+            - UPSTREAM=grafana:3000
+        ports:
+            - "443:443"
+        volumes:
+            - letsencrypt:/etc/letsencrypt
+            - letsencrypt_backups:/var/lib/letsencrypt
+            - dhparam_cache:/cache
+        depends_on:
+            - grafana
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    letsencrypt: {}
+    letsencrypt_backups: {}
+    dhparam_cache: {}
