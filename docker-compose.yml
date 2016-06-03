@@ -32,12 +32,16 @@ services:
         image: opencapacity/lets-nginx:1.3
         environment:
             - EMAIL=webmaster@opencapacity.co
+            - DOMAIN=test.opencapacity.co
+            - UPSTREAM=grafana:3000
         ports:
             - "443:443"
         volumes:
             - letsencrypt:/etc/letsencrypt
             - letsencrypt_backups:/var/lib/letsencrypt
             - dhparam_cache:/cache
+        depends_on:
+            - grafana
 volumes:
     prometheus_data: {}
     grafana_data: {}
