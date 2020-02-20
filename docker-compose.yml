@@ -9,7 +9,7 @@ services:
             - '-config.file=/etc/prometheus/prometheus.yml'
             - '-alertmanager.url=http://alertmanager:9093'
     node-exporter:
-        image: prom/node-exporter:0.12.0rc1
+        image: prom/node-exporter:v0.13.0
     grafana:
         image: grafana/grafana:3.0.1
         environment:
